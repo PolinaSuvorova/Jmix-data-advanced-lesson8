@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://workloadinfoScreen.caption">
+    <data>
+        <keyValueInstance id="workloadDc">
+            <properties>
+                <property name="assignee" class="com.company.jmixpm.entity.User"/>
+                <property name="estimatedEfforts" datatype="long"/>
+            </properties>
+        </keyValueInstance>
+
+    </data>
+    <dialogMode forceDialog="true" width="AUTO" height="AUTO"/>
+    <actions>
+        <action id="closeWindow" caption="close"/>
+     </actions>
+    <layout>
+        <form dataContainer="workloadDc">
+            <entityPicker id="assigneeField" property="assignee"/>
+            <textField id="estimatedEffortsField" property="estimatedEfforts"/>
+        </form>
+    </layout>
+</window>
