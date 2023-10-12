@@ -40,6 +40,7 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
+                <textArea rows="5" id="lablesField" property="lables"/>
             </column>
         </form>
         <tabSheet id="tabSheet" width="100%">
@@ -63,7 +64,6 @@
                 </table>
             </tab>
             <tab id="tasksTab" caption="Tasks" margin="true,false,false,false">
-
                 <table id="tasksTable" width="200%" dataContainer="tasksDc">
                     <actions>
                         <action id="create" type="create"/>
@@ -85,7 +85,6 @@
                 </table>
             </tab>
         </tabSheet>
-
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>

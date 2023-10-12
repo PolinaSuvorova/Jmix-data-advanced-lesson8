@@ -1,9 +1,12 @@
 package com.company.jmixpm.entity;
 
+import com.company.jmixpm.datatype.ProjectLabels;
+import com.company.jmixpm.datatype.ProjectLablesConverter;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.metamodel.annotation.PropertyDatatype;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,6 +24,10 @@ public class Project {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+    @Convert( converter = ProjectLablesConverter.class)
+    @PropertyDatatype("projectlabels")
+    @Column(name = "LABLES")
+    private ProjectLabels lables;
 
     @Column(name = "STATUS")
     private Integer status;
@@ -50,6 +57,14 @@ public class Project {
     @JoinColumn(name = "MANAGER_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User manager;
+
+    public ProjectLabels getLables() {
+        return lables;
+    }
+
+    public void setLables(ProjectLabels lables) {
+        this.lables = lables;
+    }
 
     public List<Task> getTasks() {
         return tasks;
