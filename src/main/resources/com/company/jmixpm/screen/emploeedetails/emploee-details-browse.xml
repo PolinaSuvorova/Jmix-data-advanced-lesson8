@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://emploeeDetailsBrowse.caption"
+        focusComponent="emploeeDetailsesTable">
+    <data readOnly="true">
+        <collection id="emploeeDetailsesDc"
+                    class="com.company.jmixpm.entity.EmploeeDetails">
+            <fetchPlan extends="_base">
+                <property name="emploee" fetchPlan="_base">
+                    <property name="emploeeDetails" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="emploeeDetailsesDl">
+                <query>
+                    <![CDATA[select e from EmploeeDetails e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="emploeeDetailsesTable" spacing="true">
+        <filter id="filter"
+                dataLoader="emploeeDetailsesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="emploeeDetailsesTable"
+                    width="100%"
+                    dataContainer="emploeeDetailsesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="pasportNumber"/>
+                <column id="expiryDate"/>
+                <column id="emploee"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="emploeeDetailsesTable.create"/>
+                <button id="editBtn" action="emploeeDetailsesTable.edit"/>
+                <button id="removeBtn" action="emploeeDetailsesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

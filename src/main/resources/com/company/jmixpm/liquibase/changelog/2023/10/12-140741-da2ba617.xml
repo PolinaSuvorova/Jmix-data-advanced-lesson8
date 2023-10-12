@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="jmixpm">
+        <createTable tableName="ROAD_MAP">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ROAD_MAP"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GOAL" type="VARCHAR(255)"/>
+            <column name="PROJECT_ID" type="UUID"/>
+            <column name="ESTIMATION_START_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ESTIMATION_END_DATE" type="DATE"/>
+            <column name="ESTIMATION_DESCRIPTION" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="jmixpm">
+        <createIndex indexName="IDX_ROAD_MAP_PROJECT" tableName="ROAD_MAP">
+            <column name="PROJECT_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="PROJECT_ID" baseTableName="ROAD_MAP"
+                                 constraintName="FK_ROAD_MAP_ON_PROJECT" referencedColumnNames="ID"
+                                 referencedTableName="PROJECT"/>
+    </changeSet>
+</databaseChangeLog>
