@@ -88,6 +88,8 @@
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
+            <button id="performBeanValidator" caption="Validate"/>
+            <button id="commitWithBeanValidator" caption="Commit"/>
         </hbox>
     </layout>
 </window>

@@ -2,6 +2,8 @@ package com.company.jmixpm.entity;
 
 import com.company.jmixpm.datatype.ProjectLabels;
 import com.company.jmixpm.datatype.ProjectLablesConverter;
+import com.company.jmixpm.validation.ProjectLabelSize;
+import com.company.jmixpm.validation.ValidateDateProject;
 import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
@@ -11,6 +13,7 @@ import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.core.metamodel.annotation.PropertyDatatype;
+import io.jmix.core.validation.group.UiCrossFieldChecks;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,6 +27,7 @@ import java.util.UUID;
         @Index(name = "IDX_PROJECT_MANAGER", columnList = "MANAGER_ID")
 })
 @Entity
+@ValidateDateProject(groups = {UiCrossFieldChecks.class})
 public class Project {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
@@ -33,6 +37,7 @@ public class Project {
     @Convert(converter = ProjectLablesConverter.class)
     @PropertyDatatype("projectlabels")
     @Column(name = "LABLES")
+    @ProjectLabelSize(min = 2)
     private ProjectLabels lables;
 
     @Column(name = "STATUS")
