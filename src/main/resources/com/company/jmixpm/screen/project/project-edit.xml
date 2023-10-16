@@ -31,8 +31,8 @@
     <layout spacing="true" expand="tabSheet">
         <form id="form" dataContainer="projectDc">
             <column width="350px">
-                <textField id="nameField" property="name"/>
-                <dateField id="startDateField" property="startDate"/>
+                <field id="nameField" property="name"/>
+                <field id="startDateField" property="startDate"/>
                 <dateField id="endDateField" property="endDate"/>
                 <entityPicker id="managerField" property="manager">
                     <actions>
@@ -40,7 +40,7 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <textArea rows="5" id="lablesField" property="lables"/>
+                <field id ="lablesField" property="lables"/>
             </column>
         </form>
         <tabSheet id="tabSheet" width="100%">

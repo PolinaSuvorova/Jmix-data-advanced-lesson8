@@ -1,5 +1,6 @@
 package com.company.jmixpm.entity;
 
+import com.company.jmixpm.app.TaskJpaListener;
 import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
@@ -7,6 +8,7 @@ import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.metamodel.annotation.JmixProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
+@EntityListeners(TaskJpaListener.class)
 @JmixEntity
 @Table(name = "TASK_", indexes = {
         @Index(name = "IDX_TASK__PROJECT", columnList = "PROJECT_ID")
@@ -24,6 +27,10 @@ public class Task {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @JmixProperty
+    @Transient
+    private LocalDateTime supposedEndate;
 
     @InstanceName
     @Column(name = "NAME", nullable = false)
@@ -58,6 +65,14 @@ public class Task {
     @Column(name = "IS_CLOSED", nullable = false)
     @NotNull
     private Boolean isClosed = false;
+
+    public LocalDateTime getSupposedEndate() {
+        return supposedEndate;
+    }
+
+    public void setSupposedEndate(LocalDateTime supposedEndate) {
+        this.supposedEndate = supposedEndate;
+    }
 
     public Boolean getIsClosed() {
         return isClosed;
@@ -129,5 +144,12 @@ public class Task {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @PostLoad
+    public void postLoad() {
+     if (estimatedEfforts != null) {
+         supposedEndate = startDate != null? startDate.plusHours(estimatedEfforts): LocalDateTime.now().plusHours(estimatedEfforts);
+     }
     }
 }
