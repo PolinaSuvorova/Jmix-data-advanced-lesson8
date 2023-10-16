@@ -7,6 +7,7 @@
                   class="com.company.jmixpm.entity.Project">
             <fetchPlan extends="_base">
                 <property name="manager" fetchPlan="_base"/>
+                <property name="owner" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
             <collection id="participantsDc" property="participants"/>
@@ -40,7 +41,13 @@
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <field id ="lablesField" property="lables"/>
+                <field id="lablesField" property="lables"/>
+                <entityPicker id="ownerField" property="owner">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
             </column>
         </form>
         <tabSheet id="tabSheet" width="100%">
