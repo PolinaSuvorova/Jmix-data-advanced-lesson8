@@ -58,10 +58,11 @@ public class User implements JmixUserDetails, HasTimeZone {
     protected String timeZoneId;
 
     @JoinTable(name = "PROJECT_USER_LINK",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PROJECT_ID"))
+            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private List<Project> projects;
+
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
 

@@ -34,6 +34,9 @@ public class Project {
     @Id
     private UUID id;
 
+    @Column(name = "TOTAL_ESTIMATED_EFFORTS")
+    private Integer totalEstimatedEfforts;
+
     @Convert(converter = ProjectLablesConverter.class)
     @PropertyDatatype("projectlabels")
     @Column(name = "LABLES")
@@ -78,6 +81,14 @@ public class Project {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public Integer getTotalEstimatedEfforts() {
+        return totalEstimatedEfforts;
+    }
+
+    public void setTotalEstimatedEfforts(Integer totalEstimatedEfforts) {
+        this.totalEstimatedEfforts = totalEstimatedEfforts;
+    }
 
     public Date getDeletedDate() {
         return deletedDate;

@@ -28,10 +28,6 @@ public class Task {
     @Id
     private UUID id;
 
-    @JmixProperty
-    @Transient
-    private LocalDateTime supposedEndate;
-
     @InstanceName
     @Column(name = "NAME", nullable = false)
     @NotNull
@@ -65,6 +61,10 @@ public class Task {
     @Column(name = "IS_CLOSED", nullable = false)
     @NotNull
     private Boolean isClosed = false;
+
+    @JmixProperty
+    @Transient
+    private LocalDateTime supposedEndate;
 
     public LocalDateTime getSupposedEndate() {
         return supposedEndate;
